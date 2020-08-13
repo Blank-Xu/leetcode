@@ -4,16 +4,21 @@ import (
 	"testing"
 )
 
+// https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 // https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
 
+// Runtime: 8 ms, faster than 89.85% of Go online submissions for Remove Duplicates from Sorted Array.
+// Memory Usage: 4.6 MB, less than 75.38% of Go online submissions for Remove
 func removeDuplicates(nums []int) int {
 	n := 0
-	for _, v := range nums {
-		if v != nums[n] {
+
+	for idx := range nums {
+		if nums[idx] != nums[n] {
 			n++
-			nums[n] = v
+			nums[n] = nums[idx]
 		}
 	}
+
 	return n + 1
 }
 
@@ -38,7 +43,9 @@ func Test_removeDuplicates(t *testing.T) {
 }
 
 func Benchmark_removeDuplicates(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		_ = removeDuplicates(recordsRemoveDuplicates[1].input)
+	for idx := range recordsRemoveDuplicates {
+		for i := 0; i < b.N; i++ {
+			_ = removeDuplicates(recordsRemoveDuplicates[idx].input)
+		}
 	}
 }

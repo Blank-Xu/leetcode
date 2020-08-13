@@ -4,10 +4,11 @@ import (
 	"testing"
 )
 
+// https://leetcode.com/problems/roman-to-integer/
 // https://leetcode-cn.com/problems/roman-to-integer/
 
 var (
-	romanSlice = [7]struct {
+	romanArray = [7]struct {
 		symbol byte
 		num    int
 	}{
@@ -31,25 +32,26 @@ var (
 	}
 )
 
+// Runtime: 0 ms, faster than 100.00% of Go online submissions for Roman to Integer.
+// Memory Usage: 3.1 MB, less than 79.06% of Go online submissions for Roman to Integer.
 func romanToInt(s string) int {
-	var (
-		l = len(s)
-		v int
-	)
-	if l == 1 {
+	var v int
+	l := len(s)
+
+	switch l {
+	case 1:
 		return romanGetValue(s[0])
-	} else if l == 2 {
+	case 2:
 		v = romanCheckRule(s[0], s[1])
 		if v > 0 {
 			return v
 		}
 	}
 
-	var b = []byte(s)
-	l = len(b)
+	b := []byte(s)
+	n := l - 1
 
 	var (
-		n     = l - 1
 		skip  bool
 		value int
 	)
@@ -59,7 +61,9 @@ func romanToInt(s string) int {
 			skip = false
 			continue
 		}
+
 		v = romanCheckRule(b[i], b[i+1])
+
 		if v > 0 {
 			skip = true
 			value += v
@@ -67,44 +71,46 @@ func romanToInt(s string) int {
 			value += romanGetValue(b[i])
 		}
 	}
+
 	if !skip {
 		value += romanGetValue(b[n])
 	}
+
 	return value
 }
 
 func romanCheckRule(l, r byte) int {
-	for i := range romanRules {
-		if l == romanRules[i].symbol {
-			if r == romanRules[i].r2 {
-				return romanRules[i].v2
-			} else if r == romanRules[i].r1 {
-				return romanRules[i].v1
+	for idx := range romanRules {
+		if l == romanRules[idx].symbol {
+			if r == romanRules[idx].r2 {
+				return romanRules[idx].v2
+			} else if r == romanRules[idx].r1 {
+				return romanRules[idx].v1
 			}
 		}
 	}
+
 	return 0
 }
 
 func romanGetValue(b byte) int {
-	for i := range romanSlice {
-		if b == romanSlice[i].symbol {
-			return romanSlice[i].num
+	for idx := range romanArray {
+		if b == romanArray[idx].symbol {
+			return romanArray[idx].num
 		}
 	}
+
 	return 0
 }
 
 func romanToInt2(s string) int {
-	var l = len(s)
+	l := len(s)
 	if l == 1 {
 		return romanGetValue(s[0])
 	}
 
-	var (
-		n        = l - 1
-		v, value int
-	)
+	var v, value int
+	n := l - 1
 
 	for i := 0; i < l; i++ {
 		v = romanGetValue(s[i])
@@ -114,6 +120,7 @@ func romanToInt2(s string) int {
 			value -= v
 		}
 	}
+
 	return value
 }
 
@@ -136,8 +143,12 @@ var recordsRomanToInt = []struct {
 
 func Test_romanToInt(t *testing.T) {
 	for _, record := range recordsRomanToInt {
+		if result := romanToInt(record.input); result != record.output {
+			t.Errorf("romanToInt test data: %v, need: %v, get: %v", record, record.output, result)
+		}
+
 		if result := romanToInt2(record.input); result != record.output {
-			t.Errorf("test data: %v, need: %v, get: %v", record, record.output, result)
+			t.Errorf("romanToInt2 test data: %v, need: %v, get: %v", record, record.output, result)
 		}
 	}
 }

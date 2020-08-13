@@ -1,10 +1,10 @@
 package leetcode
 
 import (
-	"sort"
 	"testing"
 )
 
+// https://leetcode.com/problems/search-insert-position/
 // https://leetcode-cn.com/problems/search-insert-position/
 
 func searchInsert1(nums []int, target int) int {
@@ -26,14 +26,11 @@ func searchInsert1(nums []int, target int) int {
 		index = l
 	}
 
-	nums = append(nums, target)
-	sort.Slice(nums, func(i, j int) bool {
-		return i < j
-	})
-
 	return index
 }
 
+// Runtime: 4 ms, faster than 89.86% of Go online submissions for Search Insert Position.
+// Memory Usage: 3.1 MB, less than 99.76% of Go online submissions for Search Insert Position.
 func searchInsert2(nums []int, target int) int {
 	l := len(nums)
 	if l == 0 {
@@ -44,14 +41,11 @@ func searchInsert2(nums []int, target int) int {
 		if nums[i] < target {
 			continue
 		}
+
 		return i
 	}
 
-	if target > nums[l-1] {
-		return l
-	}
-
-	return -1
+	return l
 }
 
 // ------------------------------------------------
@@ -86,13 +80,17 @@ func Test_searchInsert2(t *testing.T) {
 }
 
 func Benchmark_searchInsert1(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		_ = searchInsert1(recordsSearchInsert[0].nums, recordsSearchInsert[0].val)
+	for idx := range recordsSearchInsert {
+		for i := 0; i < b.N; i++ {
+			_ = searchInsert1(recordsSearchInsert[idx].nums, recordsSearchInsert[idx].val)
+		}
 	}
 }
 
 func Benchmark_searchInsert2(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		_ = searchInsert2(recordsSearchInsert[0].nums, recordsSearchInsert[0].val)
+	for idx := range recordsSearchInsert {
+		for i := 0; i < b.N; i++ {
+			_ = searchInsert2(recordsSearchInsert[idx].nums, recordsSearchInsert[idx].val)
+		}
 	}
 }

@@ -4,20 +4,27 @@ import (
 	"testing"
 )
 
+// https://leetcode.com/problems/remove-element/
 // https://leetcode-cn.com/problems/remove-element/
 
+// Runtime: 0 ms, faster than 100.00% of Go online submissions for Remove Element.
+// Memory Usage: 2.1 MB, less than 73.02% of Go online submissions for Remove Element.
 func removeElement(nums []int, val int) int {
 	l := len(nums)
+
 	if l == 0 {
 		return 0
 	}
+
 	n := -1
+
 	for i := 0; i < l; i++ {
 		if nums[i] != val {
 			n++
 			nums[n] = nums[i]
 		}
 	}
+
 	return n + 1
 }
 
@@ -43,7 +50,9 @@ func Test_removeElement(t *testing.T) {
 }
 
 func Benchmark_removeElement(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		_ = removeElement(recordsRemoveElement[0].nums, recordsRemoveElement[0].val)
+	for idx := range recordsRemoveElement {
+		for i := 0; i < b.N; i++ {
+			_ = removeElement(recordsRemoveElement[idx].nums, recordsRemoveElement[idx].val)
+		}
 	}
 }
