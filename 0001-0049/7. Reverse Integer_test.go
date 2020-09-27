@@ -7,7 +7,6 @@ import (
 )
 
 // https://leetcode.com/problems/reverse-integer/
-// https://leetcode-cn.com/problems/reverse-integer/
 
 func reverse(x int) int {
 	if x > math.MaxInt32 || x < math.MinInt32 {

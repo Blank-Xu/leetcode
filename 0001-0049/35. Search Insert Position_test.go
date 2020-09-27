@@ -5,7 +5,6 @@ import (
 )
 
 // https://leetcode.com/problems/search-insert-position/
-// https://leetcode-cn.com/problems/search-insert-position/
 
 func searchInsert1(nums []int, target int) int {
 	l := len(nums)

@@ -5,7 +5,6 @@ import (
 )
 
 // https://leetcode.com/problems/valid-parentheses/
-// https://leetcode-cn.com/problems/valid-parentheses/
 
 var valueArray = [6]struct {
 	symbol byte

@@ -5,7 +5,6 @@ import (
 )
 
 // https://leetcode.com/problems/remove-duplicates-from-sorted-array/
-// https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
 
 // Runtime: 8 ms, faster than 89.85% of Go online submissions for Remove Duplicates from Sorted Array.
 // Memory Usage: 4.6 MB, less than 75.38% of Go online submissions for Remove

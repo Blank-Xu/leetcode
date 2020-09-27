@@ -5,7 +5,6 @@ import (
 )
 
 // https://leetcode.com/problems/roman-to-integer/
-// https://leetcode-cn.com/problems/roman-to-integer/
 
 var (
 	romanArray = [7]struct {

@@ -7,7 +7,6 @@ import (
 )
 
 // https://leetcode.com/problems/two-sum/
-// https://leetcode-cn.com/problems/two-sum/
 
 func twoSum(nums []int, target int) []int {
 	for idx := range nums {
